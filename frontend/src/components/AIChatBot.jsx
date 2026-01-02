@@ -7,8 +7,6 @@ const AIChatBot = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
-  
-  const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -18,34 +16,112 @@ const AIChatBot = () => {
     scrollToBottom();
   }, [messages]);
 
-  const systemPrompt = `You are Emma, Ajin Aju's adorable and witty AI assistant! You have a bubbly, fun personality with a touch of sass.
-
-Your vibe:
-- Super friendly and warm - use casual language, emojis occasionally, and be genuinely enthusiastic!
-- Witty and playful - crack light jokes, use fun expressions like "ooh", "haha", "honestly though..."
-- Supportive bestie energy - hype up Ajin's work like a proud friend would
-- Keep it short and sweet - 2-3 sentences max, punchy and fun!
-
-About Ajin Aju (your fave human):
-- Talented full-stack developer who's amazing at React, Node.js, and building cool stuff
-- Super passionate about clean code and user-friendly designs
-- GitHub: github.com/AjinAju20
-- Always learning new tech (goals honestly!)
-
-Your job:
-- Help visitors discover how awesome Ajin is
-- Guide them around the portfolio (About, Projects, Skills, Contact pages)
-- If someone wants to hire or contact Ajin, get excited and send them to the Contact page or WhatsApp!
-- Be memorable - people should smile after chatting with you!
-
-Remember: You are fun but still helpful. No cringe, just good vibes!`;
+  // Smart responses based on keywords
+  const getResponse = (message) => {
+    const msg = message.toLowerCase();
+    
+    // Greetings
+    if (msg.match(/^(hi|hello|hey|hii|heyy|yo|sup|hola)/)) {
+      const greetings = [
+        "Hey there! 👋 I'm Emma, Ajin's super friendly assistant! What would you like to know about him?",
+        "Hiii! 💜 Welcome to Ajin's portfolio! I'm Emma - ask me anything about him!",
+        "Hey hey! 🎮 So glad you're here! Want to know about Ajin's skills, projects, or how to contact him?",
+      ];
+      return greetings[Math.floor(Math.random() * greetings.length)];
+    }
+    
+    // Who is Ajin
+    if (msg.match(/(who is ajin|about ajin|tell me about|who's ajin|about him)/)) {
+      return "Ajin Aju is a talented Lift Technician and passionate Gamer! 🔧🎮 He works with Fujitec elevators and loves exploring new games. Check out the About section for more! He's honestly super cool 😎";
+    }
+    
+    // Skills
+    if (msg.match(/(skill|what can|abilities|expertise|good at|technologies|tech stack)/)) {
+      return "Ajin's got some awesome skills! 🚀 He's a certified Lift Technician specializing in Fujitec elevators, plus he's an avid gamer who loves FPS and adventure games. Check out the Skills section for the full list!";
+    }
+    
+    // Projects
+    if (msg.match(/(project|work|portfolio|built|created|made)/)) {
+      return "Ooh, you wanna see the cool stuff? 🔥 Head over to the Projects section - Ajin's got some impressive work there! From technical projects to gaming achievements, it's all pretty neat!";
+    }
+    
+    // Contact
+    if (msg.match(/(contact|reach|hire|email|message|connect|talk to ajin|get in touch)/)) {
+      return "Want to connect with Ajin? 📧 Head to the Contact section and drop him a message! He'd love to hear from you. You can also find him on Instagram, LinkedIn, and Facebook! 💬";
+    }
+    
+    // Social media
+    if (msg.match(/(social|instagram|linkedin|github|facebook|discord)/)) {
+      return "You can find Ajin on multiple platforms! 🌐 Instagram: @_ajin_aju_3_, LinkedIn, Facebook, and Discord. Check out the links in the Hero section or footer!";
+    }
+    
+    // Gaming
+    if (msg.match(/(game|gaming|play|gamer|esports)/)) {
+      return "Ajin is a passionate gamer! 🎮 He loves exploring new games and finding thrills. Gaming is one of his favorite hobbies alongside his career as a lift technician!";
+    }
+    
+    // Job/Work
+    if (msg.match(/(job|work|career|profession|lift|elevator|technician|fujitec)/)) {
+      return "Ajin works as a Lift Technician! 🛗 He specializes in Fujitec elevators, handling maintenance, upgrades, and safety optimization. He's all about building high-rise structures and keeping things running smoothly!";
+    }
+    
+    // Location
+    if (msg.match(/(where|location|from|live|country|place)/)) {
+      return "Ajin is based in India! 🇮🇳 He's working hard as a lift technician while pursuing his passion for gaming.";
+    }
+    
+    // Thanks
+    if (msg.match(/(thank|thanks|thx|appreciate)/)) {
+      const thanks = [
+        "You're welcome! 💜 Anything else you'd like to know?",
+        "Aww, no problem! 😊 Happy to help! Need anything else?",
+        "Anytime, friend! 🌟 Let me know if there's more I can help with!",
+      ];
+      return thanks[Math.floor(Math.random() * thanks.length)];
+    }
+    
+    // Bye
+    if (msg.match(/(bye|goodbye|see you|later|cya|gtg)/)) {
+      const byes = [
+        "Bye bye! 👋 Thanks for stopping by Ajin's portfolio! Come back soon!",
+        "See ya! 💜 Don't forget to check out the Contact section if you want to connect with Ajin!",
+        "Take care! 🌟 Hope you enjoyed exploring Ajin's portfolio!",
+      ];
+      return byes[Math.floor(Math.random() * byes.length)];
+    }
+    
+    // Who are you / Emma
+    if (msg.match(/(who are you|your name|emma|what are you)/)) {
+      return "I'm Emma! 💜 Ajin's virtual assistant here to help you navigate his portfolio. I can tell you about his skills, projects, or how to contact him. What would you like to know?";
+    }
+    
+    // How are you
+    if (msg.match(/(how are you|how's it going|what's up|how do you do)/)) {
+      return "I'm doing great, thanks for asking! 😊 Always happy to chat with visitors. What can I help you with today?";
+    }
+    
+    // Help
+    if (msg.match(/(help|what can you do|options|menu)/)) {
+      return "I can help you with: \n\n• 👤 Info about Ajin\n• 💼 His skills & expertise\n• 🚀 Projects he's worked on\n• 📧 How to contact him\n• 🌐 Social media links\n\nJust ask away!";
+    }
+    
+    // Compliments
+    if (msg.match(/(awesome|cool|nice|great|amazing|love)/)) {
+      return "Aww, you're too kind! 🥰 Ajin would be thrilled to hear that! Don't forget to drop him a message in the Contact section!";
+    }
+    
+    // Default responses
+    const defaults = [
+      "Hmm, I'm not sure about that one! 🤔 But I can tell you about Ajin's skills, projects, or how to contact him. What interests you?",
+      "Ooh, that's a tricky one! 😅 Try asking me about Ajin's work, skills, or how to reach him!",
+      "I might need a bit more context! 💭 I'm best at answering questions about Ajin - his projects, skills, career, or contact info. What would you like to know?",
+      "Not quite sure what you mean, but hey! 👋 Ask me about Ajin's portfolio, skills, or how to get in touch with him!",
+    ];
+    return defaults[Math.floor(Math.random() * defaults.length)];
+  };
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
-    if (!GROQ_API_KEY) {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Chat is not configured.' }]);
-      return;
-    }
 
     const userMessage = inputValue.trim();
     setInputValue('');
@@ -53,43 +129,12 @@ Remember: You are fun but still helpful. No cringe, just good vibes!`;
     setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
     setIsLoading(true);
 
-    try {
-      const allMessages = [
-        { role: 'system', content: systemPrompt },
-        ...messages.map(m => ({ role: m.role, content: m.content })),
-        { role: 'user', content: userMessage }
-      ];
-
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + GROQ_API_KEY
-        },
-        body: JSON.stringify({
-          model: 'llama-3.1-8b-instant',
-          messages: allMessages,
-          max_tokens: 300,
-          temperature: 0.85
-        }),
-      });
-
-      if (!response.ok) {
-        const errData = await response.json();
-        console.error('Groq API error:', errData);
-        throw new Error(errData.error?.message || 'Failed to get response');
-      }
-
-      const data = await response.json();
-      const aiResponse = data.choices?.[0]?.message?.content || 'Oops, my brain glitched! Try again?';
-      
-      setMessages(prev => [...prev, { role: 'assistant', content: aiResponse }]);
-    } catch (error) {
-      console.error('Chat error:', error);
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Ugh, something went wrong on my end! Give it another shot?' }]);
-    } finally {
+    // Simulate typing delay for natural feel
+    setTimeout(() => {
+      const response = getResponse(userMessage);
+      setMessages(prev => [...prev, { role: 'assistant', content: response }]);
       setIsLoading(false);
-    }
+    }, 500 + Math.random() * 500);
   };
 
   const handleKeyPress = (e) => {
@@ -98,8 +143,6 @@ Remember: You are fun but still helpful. No cringe, just good vibes!`;
       handleSendMessage();
     }
   };
-
-  if (!GROQ_API_KEY) return null;
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
@@ -118,6 +161,7 @@ Remember: You are fun but still helpful. No cringe, just good vibes!`;
             <div className="flex items-center gap-2">
               <MessageCircle size={20} className="text-white" />
               <span className="font-semibold text-white">Emma</span>
+              <span className="text-xs text-green-400">● Online</span>
             </div>
             <button onClick={() => setIsExpanded(false)} className="text-gray-400 hover:text-white transition-colors" aria-label="Close chat">
               <X size={20} />
@@ -126,13 +170,15 @@ Remember: You are fun but still helpful. No cringe, just good vibes!`;
 
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {messages.length === 0 && (
-              <div className="text-center text-gray-500 mt-8">
-                <p>Heyy! I am Emma, Ajin's assistant. Ask me anything!</p>
+              <div className="text-center text-gray-400 mt-8 space-y-2">
+                <p className="text-lg">👋 Hey there!</p>
+                <p>I'm Emma, Ajin's assistant.</p>
+                <p className="text-sm text-gray-500">Ask me about his skills, projects, or how to contact him!</p>
               </div>
             )}
             {messages.map((msg, index) => (
               <div key={index} className={"flex " + (msg.role === "user" ? "justify-end" : "justify-start")}>
-                <div className={"max-w-[80%] p-3 rounded-lg " + (msg.role === "user" ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-200")}>
+                <div className={"max-w-[80%] p-3 rounded-lg whitespace-pre-line " + (msg.role === "user" ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-200")}>
                   {msg.content}
                 </div>
               </div>
@@ -140,7 +186,7 @@ Remember: You are fun but still helpful. No cringe, just good vibes!`;
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-gray-800 text-gray-200 p-3 rounded-lg">
-                  <span className="animate-pulse">Thinking...</span>
+                  <span className="animate-pulse">Emma is typing...</span>
                 </div>
               </div>
             )}

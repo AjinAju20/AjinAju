@@ -27,7 +27,7 @@ const Hero = () => {
                          text-5xl sm:text-6xl md:text-6xl lg:text-[71px]"
               style={{ lineHeight: 1 }}
             >
-              Hi! Myself 
+              Hi! It's me 
             </span><br />
             <span
               className="font-bold tracking-tight bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text text-transparent
@@ -44,7 +44,7 @@ const Hero = () => {
                 lg: 70,
               }}
               strokeWidth={1.5}
-              text="Lift technician and Gamer"
+              text="Who Loves Gaming."
               color="url(#gradient)"
             />
           </div>

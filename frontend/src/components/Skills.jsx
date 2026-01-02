@@ -2,150 +2,91 @@ import React, { useRef } from "react";
 import { cn } from "../lib/utils";
 import { CardSpotlight } from "./ui/card-spotlight";
 import {
-  FaReact,
-  FaHtml5,
-  FaCss3Alt,
-  FaJs,
-  FaPython,
+  FaWrench,
+  FaTools,
+  FaCog,
+  FaGamepad,
+  FaHeadset,
 } from "react-icons/fa";
-import { SiTypescript } from "react-icons/si";
+import { 
+  GiElevator, 
+  GiMechanicGarage,
+  GiConsoleController,
+  GiGamepadCross,
+  GiJoystick
+} from "react-icons/gi";
+import { 
+  MdElevator,
+  MdEngineering,
+  MdBuild,
+  MdSportsEsports,
+  MdElectricalServices
+} from "react-icons/md";
+import { 
+  BsController,
+  BsLightningCharge,
+  BsGearFill,
+  BsShieldCheck,
+  BsSpeedometer2
+} from "react-icons/bs";
+import {
+  AiOutlineSafety,
+  AiOutlineThunderbolt
+} from "react-icons/ai";
+import {
+  RiTeamLine,
+  RiCustomerService2Fill
+} from "react-icons/ri";
+import {
+  TbEngine,
+  TbSettingsAutomation
+} from "react-icons/tb";
 
 const Skills = () => {
   const colors = [
-    [138, 43, 226],  // Purple
-    [147, 112, 219], // Light Purple
-    [186, 85, 211],  // Medium Purple
-    [153, 50, 204],  // Dark Purple
-    [218, 112, 214], // Orchid
-    [221, 160, 221], // Plum
-    [216, 191, 216], // Thistle
-    [0, 105, 148],   // MySQL - Deep Blue
-    [56, 189, 248],  // Tailwind-like Sky Blue
-    [70, 130, 180],  // Postgresql
-    [57, 255, 20],   // Three.js - Neon Green
-    [30, 41, 59],    //Next.js - Slate Blue
-    [255, 0, 128],   // Framer Motion - Vibrant Pink
-    [0, 199, 255],   // Figma - Vivid Cyan/Blue
-    [104, 160, 99],  // Node.js - Medium Green
-    [51, 51, 51],    // Express.js - Dark Gray
-    [255, 136, 0],   // Postman - Bright Orange
-    [242, 101, 34],  // Java - Logo Orange
-    [0, 201, 167],   //React Native - Bright Teal 
-    [255, 166, 17], // Firebase - Dark Tangerine
-    [240, 81, 51],  // Swift - Vivid Orange
-    [36, 150, 237], // Docker - Blue
-    [42, 197, 166], // FastAPI - Teal Green
+    [255, 140, 0],   // Orange - Elevator
+    [70, 130, 180],  // Steel Blue - Engineering
+    [220, 20, 60],   // Crimson - Gaming
+    [138, 43, 226],  // Purple - Controller
+    [0, 191, 255],   // Deep Sky Blue - Electric
+    [255, 215, 0],   // Gold - Tools
+    [50, 205, 50],   // Lime Green - Safety
+    [255, 69, 0],    // Red Orange - Maintenance
+    [148, 0, 211],   // Violet - Esports
+    [0, 206, 209],   // Turquoise - Tech
+    [255, 105, 180], // Hot Pink - Gaming
+    [30, 144, 255],  // Dodger Blue - Mechanical
+    [255, 99, 71],   // Tomato - Speed
+    [32, 178, 170],  // Light Sea Green - Automation
+    [255, 165, 0],   // Orange - Customer Service
+    [60, 179, 113],  // Medium Sea Green - Safety Check
+    [186, 85, 211],  // Medium Orchid - Teamwork
+    [100, 149, 237], // Cornflower Blue - Engine
+    [255, 182, 193], // Light Pink - Controller
+    [64, 224, 208],  // Turquoise - Power
   ];
 
   const icons = [
-    <FaReact key="react" className="text-white text-xl" />,
-    <FaHtml5 key="html" className="text-white text-xl" />,
-    <FaCss3Alt key="css" className="text-white text-xl" />,
-    <FaJs key="js" className="text-white text-xl" />,
-    <SiTypescript key="ts" className="text-white text-xl" />,
-    <img
-      key="gsap"
-      src="/Gsap.png"
-      alt="Gsap"
-      className="w-9 h-9 p-1 object-contain"
-    />,
-    <FaPython key="Mysql" className="text-white text-xl" />,
-    <img
-      key="MySQL"
-      src="/mysql_logo.png"
-      alt="Mysql"
-      className="w-15 h-15 p-1 object-contain"
-    />,
-    <img
-      key="tailwind"
-      src="/tailwind.png"
-      alt="Tailwind"
-      className="w-9 h-9 p-1 object-contain"
-    />,
-    <img
-      key="postgresql"
-      src="/postgresql.png"
-      alt="Postgresql"
-      className="w-9 h-9 p-1 object-contain"
-    />,
-    <img
-      key="three-js-logo"
-      src="/three-js-logo.png"
-      alt="three.js"
-      className="w-9 h-9 p-1 object-contain"
-    />,
-    <img
-      key="next-js-logo"
-      src="/next.png"
-      alt="Next.js"
-      className="w-15 h-15 p-1 object-contain"
-    />,
-    <img
-      key="motion_logo"
-      src="/motion_logo().png"
-      alt="motion"
-      className="w-15 h-15 p-1 object-contain"
-    />,
-    <img
-      key="figma_logo"
-      src="/figma_logo.png"
-      alt="figma"
-      className="w-13 h-12 p-1 object-contain"
-    />,
-    <img
-      key="NodeJS_logo"
-      src="/NodeJS_Logo.png"
-      alt="NodeJS"
-      className="w-13 h-12 p-1 object-contain"
-    />,
-    <img
-      key="ExpressJS_logo"
-      src="/ExpressJS_Logo.png"
-      alt="ExpressJS"
-      className="w-16 h-11 p-1 object-contain"
-    />,
-    <img
-      key="Postman_Logo"
-      src="/Postman_Logo.png"
-      alt="Postman"
-      className="w-15 h-15 p-1 object-contain"
-    />,
-    <img
-      key="Java_Logo"
-      src="/Java_Logo.png"
-      alt="Java"
-      className="w-13 h-14 px-1 pb-1 object-contain"
-    />,
-    <img
-      key="React_Native_Logo"
-      src="/react_native_logo.png"
-      alt="React_Native"
-      className="w-11 h-12 px-1 pb-1 object-contain"
-    />,
-    <img
-      key="Firebase_Logo"
-      src="/firebase_logo.png"
-      alt="Firebase"
-      className="w-11 h-12 px-1 pb-1 object-contain"
-    />,
-    <img
-      key="Swift_Logo"
-      src="/swift_logo.png"
-      alt="Swift"
-      className="w-10 h-10 px-1 pb-1 object-contain"
-    />,
-    <img
-      key="Docker_Logo"
-      src="/docker_logo.png"
-      alt="Docker"
-      className="w-10 h-10 px-1 pb-1 object-contain"
-    />,
-    <img
-      key="Fast_API_Logo"
-      src="/FastAPI.svg"
-      alt="FastAPI"
-      className="w-11 h-11 px-1 pb-1 object-contain"
-    />,
+    <MdElevator key="elevator" className="text-white text-3xl" />,
+    <FaWrench key="wrench" className="text-white text-2xl" />,
+    <FaGamepad key="gamepad" className="text-white text-2xl" />,
+    <GiConsoleController key="console" className="text-white text-3xl" />,
+    <MdElectricalServices key="electrical" className="text-white text-3xl" />,
+    <FaTools key="tools" className="text-white text-2xl" />,
+    <MdEngineering key="engineering" className="text-white text-3xl" />,
+    <MdBuild key="build" className="text-white text-2xl" />,
+    <MdSportsEsports key="esports" className="text-white text-3xl" />,
+    <FaCog key="cog" className="text-white text-2xl" />,
+    <FaHeadset key="headset" className="text-white text-2xl" />,
+    <BsLightningCharge key="lightning" className="text-white text-2xl" />,
+    <BsSpeedometer2 key="speed" className="text-white text-2xl" />,
+    <TbSettingsAutomation key="automation" className="text-white text-3xl" />,
+    <RiCustomerService2Fill key="service" className="text-white text-2xl" />,
+    <BsShieldCheck key="shield" className="text-white text-2xl" />,
+    <RiTeamLine key="team" className="text-white text-2xl" />,
+    <TbEngine key="engine" className="text-white text-3xl" />,
+    <BsController key="controller2" className="text-white text-2xl" />,
+    <AiOutlineThunderbolt key="thunder" className="text-white text-2xl" />,
   ];
 
   const audioSources = [
@@ -162,16 +103,13 @@ const Skills = () => {
     "/c6-piano.mp3",
     "/g6-piano.mp3",
     "/f6-piano.mp3",
-    "/a6-piano.mp3",
-    "/f6-piano.mp3",
-    "/g6-piano.mp3",
     "/b6-piano.mp3",
+    "/d6-piano.mp3",
     "/e6-piano.mp3",
-    "/d6-piano.mp3",
-    "/b6-piano.mp3",
-    "/g6-piano.mp3",
-    "/d6-piano.mp3",
     "/a6-piano.mp3",
+    "/c6-piano.mp3",
+    "/g6-piano.mp3",
+    "/f6-piano.mp3",
   ];
 
   const audioRefs = useRef([]);
@@ -199,14 +137,14 @@ const Skills = () => {
 
       {/* Heading */}
       <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-center bg-gradient-to-b from-neutral-300 to-neutral-500 bg-clip-text text-transparent z-20 mb-4 sm:mb-6">
-        Tools in My Arsenal
+        My Expertise
       </h2>
 
       {/* Prompts */}
       <div className="z-20 mb-6 text-lg font-semibold text-center">
         {/* Mobile: Tap Prompt */}
         <p className="block sm:hidden bg-gradient-to-b from-neutral-300 to-neutral-500 bg-clip-text text-transparent">
-          Try tapping on the icons 🎵
+          Get in touch icons to hear a sound🎶
         </p>
 
         {/* Desktop/Tablet: Hover Prompt */}
